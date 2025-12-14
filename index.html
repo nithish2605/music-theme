@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Music | Feel the Beat</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff4500;
+            --secondary-color: #ff8c00;
+            --accent-color: #ffd700;
+            --glass-dark: rgba(15, 15, 20, 0.7);
+            --glass-light: rgba(255, 255, 255, 0.05);
+            --text-light: rgba(255, 255, 255, 0.9);
+            --text-muted: rgba(255, 255, 255, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0a0a0f;
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+
+        /* Glassmorphism Effects */
+        .glass-card {
+            background: var(--glass-dark);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid var(--glass-light);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.2);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(10, 10, 15, 0.9) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 28px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            margin: 0 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 30px;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--text-muted);
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+        }
+
+        /* Music Cards - All in HTML/CSS */
+        .music-card {
+            background: var(--glass-dark);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            height: 100%;
+            position: relative;
+        }
+
+        .music-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(138, 43, 226, 0.2);
+        }
+
+        .music-card.playing {
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+        }
+
+        .album-cover {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(138, 43, 226, 0.9);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .music-card:hover .play-btn {
+            opacity: 1;
+        }
+
+        .music-info {
+            padding: 20px;
+        }
+
+        .song-title {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .song-artist {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 15, 20, 0.95);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.5s ease;
+        }
+
+        .music-player.active {
+            transform: translateY(0);
+        }
+
+        .player-controls button {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .player-controls button:hover {
+            color: var(--primary-color);
+        }
+
+        .play-pause-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .progress-bar {
+            height: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 10px;
+            width: 0%;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Video Section */
+        .video-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .video-card:hover .video-thumbnail {
+            transform: scale(1.05);
+        }
+
+        .video-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(138, 43, 226, 0.8);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+            height: 100%;
+        }
+
+        .quote-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .rating {
+            color: #FFD700;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(10, 10, 15, 0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--glass-dark);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .navbar-brand {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <img style="height: 55px;width: auto;"
+                src="https://keshavtunes.com/wp-content/uploads/2022/04/keashtunes.png" alt="img">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/music/index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/music.html">Music</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/video.html">Videos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/class.html">Class</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/Project.html">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Feel the Beat</h1>
+            <p class="hero-subtitle">Stream music that moves your soul</p>
+            <button class="btn btn-primary" id="playHeroBtn">
+                <i class="fas fa-play me-2"></i> Play Music
+            </button>
+        </div>
+    </section>
+
+    <!-- Music Section - ALL CARDS HARDCODED IN HTML -->
+    <section id="music" class="py-5 mt-5">
+        <div class="container">
+            <h2 class="section-title">Latest Releases</h2>
+            <p class="section-subtitle">Discover new music from our curated collection. Click on any track to play it in
+                the music player.</p>
+
+            <div class="row g-4">
+                <!-- Music Card 1 -->
+                <div class="col-md-4 col-lg-4 col-sm-6">
+                    <div class="music-card" data-song-index="0">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                                alt="Midnight City" class="album-cover">
+                            <div class="play-btn">
+                                <i class="fas fa-play text-white"></i>
+                            </div>
+                        </div>
+                        <div class="music-info">
+                            <h5 class="song-title">Midnight City</h5>
+                            <p class="song-artist">M83</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Music Card 2 -->
+                <div class="col-md-4 col-lg-4 col-sm-6">
+                    <div class="music-card" data-song-index="1">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                                alt="Blinding Lights" class="album-cover">
+                            <div class="play-btn">
+                                <i class="fas fa-play text-white"></i>
+                            </div>
+                        </div>
+                        <div class="music-info">
+                            <h5 class="song-title">Blinding Lights</h5>
+                            <p class="song-artist">The Weeknd</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Music Card 3 -->
+                <div class="col-md-4 col-lg-4 col-sm-6">
+                    <div class="music-card" data-song-index="2">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                                alt="Starboy" class="album-cover">
+                            <div class="play-btn">
+                                <i class="fas fa-play text-white"></i>
+                            </div>
+                        </div>
+                        <div class="music-info">
+                            <h5 class="song-title">Starboy</h5>
+                            <p class="song-artist">The Weeknd ft. Daft Punk</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Music Card 4 -->
+                <div class="col-md-4 col-lg-4 col-sm-6">
+                    <div class="music-card" data-song-index="3">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                                alt="Levitating" class="album-cover">
+                            <div class="play-btn">
+                                <i class="fas fa-play text-white"></i>
+                            </div>
+                        </div>
+                        <div class="music-info">
+                            <h5 class="song-title">Levitating</h5>
+                            <p class="song-artist">Dua Lipa</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Music Card 5 -->
+                <div class="col-md-4 col-lg-4 col-sm-6">
+                    <div class="music-card" data-song-index="4">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                                alt="Bad Guy" class="album-cover">
+                            <div class="play-btn">
+                                <i class="fas fa-play text-white"></i>
+                            </div>
+                        </div>
+                        <div class="music-info">
+                            <h5 class="song-title">Bad Guy</h5>
+                            <p class="song-artist">Billie Eilish</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Music Card 6 -->
+                <div class="col-md-4 col-lg-4 col-sm-6">
+                    <div class="music-card" data-song-index="5">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1519281682544-5f37c4b14c47?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                                alt="Sicko Mode" class="album-cover">
+                            <div class="play-btn">
+                                <i class="fas fa-play text-white"></i>
+                            </div>
+                        </div>
+                        <div class="music-info">
+                            <h5 class="song-title">Sicko Mode</h5>
+                            <p class="song-artist">Travis Scott</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Music Card 7 -->
+                <div class="col-md-4 col-lg-4 col-sm-6">
+                    <div class="music-card" data-song-index="6">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                                alt="Electric Dreams" class="album-cover">
+                            <div class="play-btn">
+                                <i class="fas fa-play text-white"></i>
+                            </div>
+                        </div>
+                        <div class="music-info">
+                            <h5 class="song-title">Electric Dreams</h5>
+                            <p class="song-artist">Kraftwerk</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Music Card 8 -->
+                <div class="col-md-4 col-lg-4 col-sm-6">
+                    <div class="music-card" data-song-index="7">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                                alt="Bohemian Rhapsody" class="album-cover">
+                            <div class="play-btn">
+                                <i class="fas fa-play text-white"></i>
+                            </div>
+                        </div>
+                        <div class="music-info">
+                            <h5 class="song-title">Bohemian Rhapsody</h5>
+                            <p class="song-artist">Queen</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Music Card 9 -->
+                <div class="col-md-4 col-lg-4 col-sm-6">
+                    <div class="music-card" data-song-index="8">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                                alt="Atmospheric Waves" class="album-cover">
+                            <div class="play-btn">
+                                <i class="fas fa-play text-white"></i>
+                            </div>
+                        </div>
+                        <div class="music-info">
+                            <h5 class="song-title">Atmospheric Waves</h5>
+                            <p class="song-artist">Brian Eno</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="glass-card">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                            alt="Music Studio" class="img-fluid rounded">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="glass-card">
+                        <h3 class="mb-4">About Nexus Music</h3>
+                        <p>Nexus Music is a premier digital music streaming platform that brings you the best in
+                            electronic, hip-hop, and ambient music from around the world.</p>
+                        <p>Our mission is to connect listeners with emerging artists and provide a platform for unique
+                            sounds that move the soul. We believe music is a universal language that transcends
+                            boundaries.</p>
+                        <p>With our curated playlists and personalized recommendations, you'll always discover something
+                            new that resonates with your mood and taste.</p>
+                        <button class="btn btn-primary mt-3">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Videos Section -->
+    <section id="videos" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Latest Videos</h2>
+            <p class="section-subtitle">Watch exclusive music videos and live performances from your favorite artists.
+            </p>
+
+            <div class="row g-4">
+                <!-- Video 1 -->
+                <div class="col-md-4">
+                    <div class="video-card" data-video-id="dX3k_QDnzHE">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                            alt="Midnight City - Official Video" class="video-thumbnail">
+                        <div class="video-play-btn">
+                            <i class="fas fa-play text-white"></i>
+                        </div>
+                        <div class="p-3 glass-card mt-3">
+                            <h5 class="mb-0">Midnight City - Official Video</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="col-md-4">
+                    <div class="video-card" data-video-id="LXb3EKWsInQ">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                            alt="Live Performance" class="video-thumbnail">
+                        <div class="video-play-btn">
+                            <i class="fas fa-play text-white"></i>
+                        </div>
+                        <div class="p-3 glass-card mt-3">
+                            <h5 class="mb-0">Live Performance - Electric Dreams Festival</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="col-md-4">
+                    <div class="video-card" data-video-id="7NOSDKb0HlU">
+                        <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                            alt="Studio Sessions" class="video-thumbnail">
+                        <div class="video-play-btn">
+                            <i class="fas fa-play text-white"></i>
+                        </div>
+                        <div class="p-3 glass-card mt-3">
+                            <h5 class="mb-0">Studio Sessions: Making of 'Neon Dreams'</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-5">
+        <div class="container">
+            <h2 class="section-title">What Listeners Say</h2>
+            <p class="section-subtitle">Don't just take our word for it. Here's what our community has to say.</p>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="glass-card testimonial-card">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-4">"The glassmorphism design is stunning, and the music selection is incredible. I
+                            discover new favorite tracks every day!"</p>
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h5 class="mb-0">Alex Johnson</h5>
+                                <small class="text-muted">Music Enthusiast</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="glass-card testimonial-card">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="mb-4">"As a designer, I appreciate the beautiful UI. As a music lover, I appreciate
+                            the quality tracks. Nexus Music gets both right!"</p>
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h5 class="mb-0">Maria Garcia</h5>
+                                <small class="text-muted">UI/UX Designer</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="glass-card testimonial-card">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-4">"The music player is so smooth and intuitive. I love how I can control
+                            everything from the fixed player at the bottom."</p>
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h5 class="mb-0">James Wilson</h5>
+                                <small class="text-muted">DJ & Producer</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h3 class="mb-4">NEXUS MUSIC</h3>
+                    <p class="mb-4">Stream music that moves your soul. Discover new sounds with our curated collection.
+                    </p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-spotify"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-soundcloud"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home" class="text-decoration-none text-light">Home</a></li>
+                        <li class="mb-2"><a href="#about" class="text-decoration-none text-light">About</a></li>
+                        <li class="mb-2"><a href="#music" class="text-decoration-none text-light">Music</a></li>
+                        <li class="mb-2"><a href="#videos" class="text-decoration-none text-light">Videos</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="mb-4">Legal</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-light">Privacy Policy</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-light">Terms of Service</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-light">Cookie Policy</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-light">Licensing</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 mb-4">
+                    <h5 class="mb-4">Contact Us</h5>
+                    <p class="mb-2"><i class="fas fa-envelope me-2"></i> contact@nexusmusic.com</p>
+                    <p class="mb-2"><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> Los Angeles, CA</p>
+                </div>
+            </div>
+
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+
+            <div class="text-center">
+                <p>&copy; 2023 Nexus Music. All rights reserved. | Designed with <i
+                        class="fas fa-heart text-danger"></i> for music lovers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-3 d-flex align-items-center mb-3 mb-md-0">
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80"
+                        alt="Album Cover" id="playerAlbumCover" class="rounded me-3" width="60" height="60">
+                    <div>
+                        <h6 class="mb-0" id="playerSongTitle">Midnight City</h6>
+                        <small class="text-muted" id="playerArtist">M83</small>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <div class="player-controls d-flex justify-content-center align-items-center mb-3">
+                        <button id="prevBtn">
+                            <i class="fas fa-step-backward"></i>
+                        </button>
+                        <button class="play-pause-btn mx-3" id="playPauseBtn">
+                            <i class="fas fa-play" id="playPauseIcon"></i>
+                        </button>
+                        <button id="nextBtn">
+                            <i class="fas fa-step-forward"></i>
+                        </button>
+                    </div>
+
+                    <div class="progress-container">
+                        <div class="d-flex justify-content-between mb-1">
+                            <small id="currentTime">0:00</small>
+                            <small id="totalTime">0:00</small>
+                        </div>
+                        <div class="progress-bar" id="progressBar">
+                            <div class="progress" id="progress"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 d-flex align-items-center justify-content-md-end">
+                    <i class="fas fa-volume-up me-2"></i>
+                    <input type="range" min="0" max="100" value="70" class="form-range volume-slider" id="volumeSlider"
+                        style="width: 100px;">
+                    <button class="btn btn-sm btn-outline-light ms-3" id="closePlayer">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content glass-card">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="videoModalTitle">Music Video</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="ratio ratio-16x9">
+                        <iframe id="videoFrame" src="" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="audioPlayer">
+        <!-- Audio source will be set by JavaScript -->
+    </audio>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Music data array - only for player functionality
+        const musicData = [
+            {
+                title: "Midnight City",
+                artist: "M83",
+                cover: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                audio: "https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3"
+            },
+            {
+                title: "Blinding Lights",
+                artist: "The Weeknd",
+                cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                audio: "https://assets.mixkit.co/music/preview/mixkit-driving-ambition-32.mp3"
+            },
+            {
+                title: "Starboy",
+                artist: "The Weeknd ft. Daft Punk",
+                cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                audio: "https://assets.mixkit.co/music/preview/mixkit-summer-breeze-39.mp3"
+            },
+            {
+                title: "Levitating",
+                artist: "Dua Lipa",
+                cover: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                audio: "https://assets.mixkit.co/music/preview/mixkit-urban-funk-152.mp3"
+            },
+            {
+                title: "Bad Guy",
+                artist: "Billie Eilish",
+                cover: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                audio: "https://assets.mixkit.co/music/preview/mixkit-clear-sky-479.mp3"
+            },
+            {
+                title: "Sicko Mode",
+                artist: "Travis Scott",
+                cover: "https://images.unsplash.com/photo-1519281682544-5f37c4b14c47?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                audio: "https://assets.mixkit.co/music/preview/mixkit-lofi-chill-145.mp3"
+            },
+            {
+                title: "Electric Dreams",
+                artist: "Kraftwerk",
+                cover: "https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                audio: "https://assets.mixkit.co/music/preview/mixkit-deep-urban-623.mp3"
+            },
+            {
+                title: "Bohemian Rhapsody",
+                artist: "Queen",
+                cover: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                audio: "https://assets.mixkit.co/music/preview/mixkit-intense-rock-1151.mp3"
+            },
+            {
+                title: "Atmospheric Waves",
+                artist: "Brian Eno",
+                cover: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                audio: "https://assets.mixkit.co/music/preview/mixkit-ambient-synth-156.mp3"
+            }
+        ];
+
+        // DOM Elements
+        const audioPlayer = document.getElementById('audioPlayer');
+        const musicPlayer = document.getElementById('musicPlayer');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const playPauseIcon = document.getElementById('playPauseIcon');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progress = document.getElementById('progress');
+        const progressBar = document.getElementById('progressBar');
+        const currentTimeEl = document.getElementById('currentTime');
+        const totalTimeEl = document.getElementById('totalTime');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const playerAlbumCover = document.getElementById('playerAlbumCover');
+        const playerSongTitle = document.getElementById('playerSongTitle');
+        const playerArtist = document.getElementById('playerArtist');
+        const playHeroBtn = document.getElementById('playHeroBtn');
+        const closePlayerBtn = document.getElementById('closePlayer');
+        const videoModal = new bootstrap.Modal(document.getElementById('videoModal'));
+        const videoFrame = document.getElementById('videoFrame');
+        const videoModalTitle = document.getElementById('videoModalTitle');
+
+        // Player state
+        let currentSongIndex = 0;
+        let isPlaying = false;
+
+        // Initialize the website
+        function init() {
+            setupEventListeners();
+
+            // Show music player after a delay
+            setTimeout(() => {
+                musicPlayer.classList.add('active');
+            }, 1500);
+        }
+
+        // Load a song by index
+        function loadSong(index) {
+            if (index < 0) index = musicData.length - 1;
+            if (index >= musicData.length) index = 0;
+
+            currentSongIndex = index;
+            const song = musicData[index];
+
+            // Update audio source
+            audioPlayer.src = song.audio;
+
+            // Update player UI
+            playerAlbumCover.src = song.cover;
+            playerSongTitle.textContent = song.title;
+            playerArtist.textContent = song.artist;
+
+            // Reset progress
+            progress.style.width = '0%';
+            currentTimeEl.textContent = '0:00';
+
+            // Load metadata to get duration
+            audioPlayer.addEventListener('loadedmetadata', function () {
+                totalTimeEl.textContent = formatTime(audioPlayer.duration);
+            }, { once: true });
+
+            // Update "now playing" indicator
+            document.querySelectorAll('.music-card').forEach(card => {
+                card.classList.remove('playing');
+            });
+
+            const currentCard = document.querySelector(`.music-card[data-song-index="${index}"]`);
+            if (currentCard) {
+                currentCard.classList.add('playing');
+            }
+
+            // Play the song
+            playSong();
+        }
+
+        // Play the current song
+        function playSong() {
+            audioPlayer.play();
+            isPlaying = true;
+            playPauseIcon.className = 'fas fa-pause';
+            musicPlayer.classList.add('active');
+        }
+
+        // Pause the current song
+        function pauseSong() {
+            audioPlayer.pause();
+            isPlaying = false;
+            playPauseIcon.className = 'fas fa-play';
+        }
+
+        // Format time in MM:SS
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const { currentTime, duration } = audioPlayer;
+            const progressPercent = (currentTime / duration) * 100;
+            progress.style.width = `${progressPercent}%`;
+            currentTimeEl.textContent = formatTime(currentTime);
+        }
+
+        // Set progress bar on click
+        function setProgress(e) {
+            const width = this.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audioPlayer.duration;
+
+            audioPlayer.currentTime = (clickX / width) * duration;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Play/Pause button
+            playPauseBtn.addEventListener('click', () => {
+                if (isPlaying) {
+                    pauseSong();
+                } else {
+                    playSong();
+                }
+            });
+
+            // Previous button
+            prevBtn.addEventListener('click', () => {
+                loadSong(currentSongIndex - 1);
+            });
+
+            // Next button
+            nextBtn.addEventListener('click', () => {
+                loadSong(currentSongIndex + 1);
+            });
+
+            // Hero play button
+            playHeroBtn.addEventListener('click', () => {
+                loadSong(0);
+                musicPlayer.classList.add('active');
+            });
+
+            // Close player button
+            closePlayerBtn.addEventListener('click', () => {
+                musicPlayer.classList.remove('active');
+                pauseSong();
+            });
+
+            // Volume slider
+            volumeSlider.addEventListener('input', () => {
+                audioPlayer.volume = volumeSlider.value / 100;
+            });
+
+            // Progress bar click
+            progressBar.addEventListener('click', setProgress);
+
+            // Time update event for audio player
+            audioPlayer.addEventListener('timeupdate', updateProgress);
+
+            // Song ended event
+            audioPlayer.addEventListener('ended', () => {
+                loadSong(currentSongIndex + 1);
+            });
+
+            // Music card click events
+            document.addEventListener('click', (e) => {
+                const musicCard = e.target.closest('.music-card');
+                if (musicCard) {
+                    const index = parseInt(musicCard.dataset.songIndex);
+                    loadSong(index);
+                }
+
+                // Video card click events
+                const videoCard = e.target.closest('.video-card');
+                if (videoCard) {
+                    const videoId = videoCard.dataset.videoId;
+
+                    videoFrame.src = `https://www.youtube.com/embed/${videoId}`;
+                    videoModalTitle.textContent = videoCard.querySelector('h5').textContent;
+                    videoModal.show();
+                }
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    if (this.getAttribute('href') === '#') return;
+
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Navbar background on scroll
+            window.addEventListener('scroll', function () {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.95)';
+                } else {
+                    navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.9)';
+                }
+            });
+        }
+
+        // Initialize the website when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+
+</html>

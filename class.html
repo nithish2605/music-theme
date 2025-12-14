@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divine Music Classes | Spiritual Learning</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&family=Noto+Sans+Tamil:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff4500;
+            --secondary-color: #ff8c00;
+            --accent-color: #ffd700;
+            --glass-dark: rgba(15, 15, 20, 0.7);
+            --glass-light: rgba(255, 255, 255, 0.05);
+            --text-light: rgba(255, 255, 255, 0.9);
+            --text-muted: rgba(255, 255, 255, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0a0a0f;
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+
+        .tamil-text {
+            font-family: 'Noto Sans Tamil', sans-serif;
+        }
+
+        /* Glassmorphism Effects */
+        .glass-card {
+            background: var(--glass-dark);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid var(--glass-light);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.2);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(10, 10, 15, 0.9) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 28px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            margin: 0 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Hero Banner */
+        .class-hero {
+            height: 60vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 76px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 30px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--text-muted);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .content-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-text {
+            padding: 30px;
+        }
+
+        .content-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .spiritual-item {
+            margin-bottom: 40px;
+        }
+
+        .spiritual-icon {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .spiritual-name {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-family: 'Noto Sans Tamil', sans-serif;
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 80px 0;
+            background: rgba(10, 10, 15, 0.5);
+        }
+
+        .form-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Form Styling */
+        .form-control,
+        .form-select {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-light);
+            color: var(--text-light);
+            border-radius: 10px;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary-color);
+            color: var(--text-light);
+            box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.2);
+        }
+
+        .form-control::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-label {
+            color: var(--text-light);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        /* Radio Button Styling */
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"] {
+            display: none;
+        }
+
+        .radio-custom {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .radio-option input[type="radio"]:checked+.radio-custom {
+            background-color: var(--primary-color);
+        }
+
+        .radio-option input[type="radio"]:checked+.radio-custom::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .radio-label {
+            color: var(--text-light);
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(10, 10, 15, 0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--glass-dark);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: translateY(-5px);
+        }
+
+        /* Back to Home Button */
+        .back-home-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(138, 43, 226, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .back-home-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .navbar-brand {
+                font-size: 24px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .content-image {
+                height: 300px;
+                margin-bottom: 30px;
+            }
+
+            .content-text {
+                padding: 20px 0;
+            }
+
+            .radio-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
+</head>
+
+<body>
+      <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <img style="height: 55px;width: auto;"
+                src="https://keshavtunes.com/wp-content/uploads/2022/04/keashtunes.png" alt="img">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/music/index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/music.html">Music</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/video.html">Videos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/class.html">Class</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/contact.html">Document</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="class-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Divine Music Classes</h1>
+            <p class="hero-subtitle">Learn the sacred art of devotional music. Connect with divine through Thevaram,
+                Thiruvasagam, and Thoupugal</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">About Divine Music Classes</h2>
+            <p class="section-subtitle">Immerse yourself in the spiritual world of devotional music and connect with the
+                divine through sacred hymns</p>
+
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
+                        alt="Music Class" class="content-image">
+                </div>
+                <div class="col-lg-6">
+                    <div class="content-text">
+                        <h3 class="content-title">Discover Spiritual Harmony</h3>
+                        <p>Our Divine Music Classes are designed to guide you through the sacred journey of devotional
+                            music. Learn from experienced gurus who have dedicated their lives to preserving and
+                            teaching these ancient traditions.</p>
+                        <p>Whether you're a beginner or have some experience, our classes will help you connect with the
+                            divine through music. We focus not just on technique, but on the spiritual essence of each
+                            composition.</p>
+                        <p>Join us in this transformative journey where music becomes a medium for spiritual awakening
+                            and inner peace.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="content-section" style="background: rgba(10, 10, 15, 0.5);">
+        <div class="container">
+            <h2 class="section-title">Course Overview</h2>
+
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
+                        alt="Music Learning" class="content-image">
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="content-text">
+                        <h3 class="content-title">What You'll Learn</h3>
+                        <p>Our comprehensive curriculum covers the foundational elements of devotional music, including:
+                        </p>
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><i class="fas fa-check-circle me-2"
+                                    style="color: var(--primary-color);"></i> Basic principles of devotional music</li>
+                            <li class="mb-3"><i class="fas fa-check-circle me-2"
+                                    style="color: var(--primary-color);"></i> Understanding ragas and talas in spiritual
+                                context</li>
+                            <li class="mb-3"><i class="fas fa-check-circle me-2"
+                                    style="color: var(--primary-color);"></i> Pronunciation and meaning of sacred texts
+                            </li>
+                            <li class="mb-3"><i class="fas fa-check-circle me-2"
+                                    style="color: var(--primary-color);"></i> Breathing techniques for sustained singing
+                            </li>
+                            <li class="mb-3"><i class="fas fa-check-circle me-2"
+                                    style="color: var(--primary-color);"></i> Spiritual significance of each composition
+                            </li>
+                            <li><i class="fas fa-check-circle me-2" style="color: var(--primary-color);"></i>
+                                Performance techniques for devotional settings</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spiritual Traditions Section -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Sacred Traditions</h2>
+            <p class="section-subtitle">Explore the divine hymns that have inspired generations</p>
+
+            <div class="row">
+                <!-- Thevaram -->
+                <div class="col-md-4 mb-4">
+                    <div class="glass-card spiritual-item text-center h-100">
+                        <div class="spiritual-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3 class="spiritual-name">தேவாரம்</h3>
+                        <h4 class="mb-3">Thevaram</h4>
+                        <p>Thevaram refers to the first seven volumes of the twelve-volume collection of devotional
+                            poetry. These hymns were composed by three saint poets and are considered sacred literature
+                            in Shaiva Siddhanta.</p>
+                        <p class="text-muted mt-3"><i class="fas fa-clock me-1"></i> 7th-8th Century CE</p>
+                    </div>
+                </div>
+
+                <!-- Thiruvasagam -->
+                <div class="col-md-4 mb-4">
+                    <div class="glass-card spiritual-item text-center h-100">
+                        <div class="spiritual-icon">
+                            <i class="fas fa-pray"></i>
+                        </div>
+                        <h3 class="spiritual-name">திருவாசகம்</h3>
+                        <h4 class="mb-3">Thiruvasagam</h4>
+                        <p>A collection of hymns written by Manikkavacakar in the 9th century. These poems express
+                            intense devotion and love for Lord Shiva and are considered among the most profound works of
+                            Tamil literature.</p>
+                        <p class="text-muted mt-3"><i class="fas fa-clock me-1"></i> 9th Century CE</p>
+                    </div>
+                </div>
+
+                <!-- Thoupugal -->
+                <div class="col-md-4 mb-4">
+                    <div class="glass-card spiritual-item text-center h-100">
+                        <div class="spiritual-icon">
+                            <i class="fas fa-hands-praying"></i>
+                        </div>
+                        <h3 class="spiritual-name">தோற்புகல்</h3>
+                        <h4 class="mb-3">Thoupugal</h4>
+                        <p>Refers to the hymns of Arunagirinathar, praising Lord Murugan. These compositions are known
+                            for their lyrical beauty, intricate rhythm patterns, and deep spiritual significance in
+                            Tamil devotional tradition.</p>
+                        <p class="text-muted mt-3"><i class="fas fa-clock me-1"></i> 15th Century CE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Class Structure Section -->
+    <section class="content-section" style="background: rgba(10, 10, 15, 0.5);">
+        <div class="container">
+            <h2 class="section-title">Class Structure</h2>
+
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
+                        alt="Class Structure" class="content-image">
+                </div>
+                <div class="col-lg-6">
+                    <div class="content-text">
+                        <h3 class="content-title">Learning Methodology</h3>
+                        <p>Our classes follow a structured approach that balances tradition with modern teaching
+                            methods:</p>
+
+                        <div class="row mt-4">
+                            <div class="col-md-6 mb-4">
+                                <div class="d-flex">
+                                    <div class="me-3">
+                                        <i class="fas fa-user-friends fa-2x" style="color: var(--primary-color);"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Small Groups</h5>
+                                        <p class="text-muted">Personal attention in small batches of 5-10 students</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <div class="d-flex">
+                                    <div class="me-3">
+                                        <i class="fas fa-calendar-alt fa-2x" style="color: var(--primary-color);"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Flexible Timing</h5>
+                                        <p class="text-muted">Morning, evening, and weekend batches available</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <div class="d-flex">
+                                    <div class="me-3">
+                                        <i class="fas fa-online fa-2x" style="color: var(--primary-color);"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Online & Offline</h5>
+                                        <p class="text-muted">Learn from anywhere with our hybrid model</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <div class="d-flex">
+                                    <div class="me-3">
+                                        <i class="fas fa-certificate fa-2x" style="color: var(--primary-color);"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Certification</h5>
+                                        <p class="text-muted">Receive certification upon course completion</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Form Section -->
+    <section class="form-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="glass-card">
+                        <h2 class="form-title">Register for Classes</h2>
+                        <p class="form-subtitle">Begin your spiritual journey with divine music. Fill out the form below
+                            to enroll in our classes.</p>
+
+                        <form id="registrationForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label for="name" class="form-label">Full Name *</label>
+                                    <input type="text" class="form-control" id="name" name="name" required
+                                        placeholder="Enter your full name">
+                                </div>
+
+                                <div class="col-md-6 mb-4">
+                                    <label for="email" class="form-label">Email Address *</label>
+                                    <input type="email" class="form-control" id="email" name="email" required
+                                        placeholder="Enter your email">
+                                </div>
+
+                                <div class="col-md-6 mb-4">
+                                    <label for="phone" class="form-label">Phone Number *</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required
+                                        placeholder="Enter your phone number">
+                                </div>
+
+                                <div class="col-md-6 mb-4">
+                                    <label for="country" class="form-label">Country *</label>
+                                    <select class="form-select" id="country" name="country" required>
+                                        <option value="" selected disabled>Select your country</option>
+                                        <option value="india">India</option>
+                                        <option value="usa">United States</option>
+                                        <option value="uk">United Kingdom</option>
+                                        <option value="canada">Canada</option>
+                                        <option value="australia">Australia</option>
+                                        <option value="singapore">Singapore</option>
+                                        <option value="malaysia">Malaysia</option>
+                                        <option value="uae">United Arab Emirates</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-12 mb-4">
+                                    <label class="form-label">Do you have singing experience? *</label>
+                                    <div class="radio-group">
+                                        <label class="radio-option">
+                                            <input type="radio" name="experience" value="yes" required>
+                                            <span class="radio-custom"></span>
+                                            <span class="radio-label">Yes, I have singing experience</span>
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="experience" value="no" required>
+                                            <span class="radio-custom"></span>
+                                            <span class="radio-label">No, I'm a beginner</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mb-4">
+                                    <label for="message" class="form-label">Additional Information (Optional)</label>
+                                    <textarea class="form-control" id="message" name="message" rows="3"
+                                        placeholder="Tell us about your musical background or any specific interests..."></textarea>
+                                </div>
+
+                                <div class="col-12">
+                                    <button type="submit" class="submit-btn">
+                                        <i class="fas fa-paper-plane me-2"></i> Submit Registration
+                                    </button>
+                                    <p class="text-muted mt-3 text-center">
+                                        <small>We'll contact you within 24 hours to confirm your enrollment</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h3 class="mb-4">NEXUS MUSIC</h3>
+                    <p class="mb-4">Preserving and teaching sacred devotional music traditions for spiritual awakening
+                        and inner peace.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-decoration-none text-light">Home</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-decoration-none text-light">About</a></li>
+                        <li class="mb-2"><a href="music.html" class="text-decoration-none text-light">Music</a></li>
+                        <li class="mb-2"><a href="classes.html" class="text-decoration-none text-light">Classes</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="mb-4">Class Offerings</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-light">Thevaram Classes</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-light">Thiruvasagam Classes</a>
+                        </li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-light">Thoupugal Classes</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-light">Beginner Workshops</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 mb-4">
+                    <h5 class="mb-4">Contact Us</h5>
+                    <p class="mb-2"><i class="fas fa-envelope me-2"></i> classes@nexusmusic.com</p>
+                    <p class="mb-2"><i class="fas fa-phone me-2"></i> +91 98765 43210</p>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> Chennai, Tamil Nadu</p>
+                </div>
+            </div>
+
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+
+            <div class="text-center">
+                <p>&copy; 2023 Nexus Music. All rights reserved. | <a href="#"
+                        class="text-decoration-none text-light">Privacy Policy</a> | <a href="#"
+                        class="text-decoration-none text-light">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Home Button -->
+    <a href="index.html" class="back-home-btn">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content glass-card">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" style="color: var(--primary-color);">Registration Successful!</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-check-circle fa-4x mb-4" style="color: var(--primary-color);"></i>
+                    <p>Thank you for registering for Divine Music Classes!</p>
+                    <p class="text-muted">We have received your registration and will contact you within 24 hours with
+                        further details.</p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Minimal JavaScript
+
+        // Form submission
+        document.getElementById('registrationForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                country: document.getElementById('country').value,
+                experience: document.querySelector('input[name="experience"]:checked').value,
+                message: document.getElementById('message').value
+            };
+
+            // In a real application, you would send this data to a server
+            console.log('Registration submitted:', formData);
+
+            // Show success modal
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+
+            // Reset form
+            this.reset();
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.95)';
+            } else {
+                navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.9)';
+            }
+        });
+
+        // Add fade-in animation to sections on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for animation
+        document.querySelectorAll('.content-section, .form-section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+
+</html>

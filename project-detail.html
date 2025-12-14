@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midnight Symphony Studio Album | Nexus Music Projects</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff4500;
+            --secondary-color: #ff8c00;
+            --accent-color: #ffd700;
+            --glass-dark: rgba(15, 15, 20, 0.7);
+            --glass-light: rgba(255, 255, 255, 0.05);
+            --text-light: rgba(255, 255, 255, 0.9);
+            --text-muted: rgba(255, 255, 255, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0a0a0f;
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+
+        /* Glassmorphism Effects */
+        .glass-card {
+            background: var(--glass-dark);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid var(--glass-light);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.2);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(10, 10, 15, 0.9) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 28px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            margin: 0 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Project Hero */
+        .project-hero {
+            height: 60vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 76px;
+            position: relative;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(10, 10, 15, 1), transparent);
+            height: 100px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 30px;
+            z-index: 2;
+        }
+
+        .project-category {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Project Detail Section */
+        .project-detail-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Project Image */
+        .project-image-container {
+            margin-bottom: 40px;
+        }
+
+        .project-main-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Meta Bar */
+        .meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid var(--glass-light);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .meta-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .meta-content h5 {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .meta-content p {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .status-completed {
+            background: linear-gradient(90deg, #00ff00, #00cc00);
+            color: black;
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 50px;
+        }
+
+        .content-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .content-title i {
+            color: var(--primary-color);
+        }
+
+        .content-text {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* Features List */
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: rgba(138, 43, 226, 0.1);
+            transform: translateX(10px);
+        }
+
+        .feature-icon {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-top: 3px;
+        }
+
+        .feature-content h4 {
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+
+        /* Tech Tags */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .tech-tag {
+            background: rgba(138, 43, 226, 0.2);
+            color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: rgba(138, 43, 226, 0.4);
+            transform: translateY(-3px);
+        }
+
+        /* Project Team */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            background: rgba(138, 43, 226, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .member-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 3px solid var(--primary-color);
+        }
+
+        .member-name {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            height: 250px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            margin-top: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 40px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 13px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .timeline-date {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            background: rgba(138, 43, 226, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Sidebar */
+        .project-sidebar {
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-card {
+            margin-bottom: 30px;
+        }
+
+        .sidebar-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--glass-light);
+        }
+
+        /* Download Links */
+        .download-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .download-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-light);
+        }
+
+        .download-link:hover {
+            background: rgba(138, 43, 226, 0.2);
+            transform: translateX(5px);
+            text-decoration: none;
+            color: var(--text-light);
+        }
+
+        /* Related Projects */
+        .related-project {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--glass-light);
+        }
+
+        .related-project:last-child {
+            border-bottom: none;
+        }
+
+        .related-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .related-title {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .related-category {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            margin-bottom: 60px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-outline:hover {
+            background: rgba(138, 43, 226, 0.1);
+            transform: translateY(-3px);
+            color: var(--primary-color);
+        }
+
+        /* Back to Projects */
+        .back-section {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .back-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--secondary-color);
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(10, 10, 15, 0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--glass-dark);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: translateY(-5px);
+        }
+
+        /* Back to Home Button */
+        .back-home-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(138, 43, 226, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .back-home-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .navbar-brand {
+                font-size: 24px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .project-main-image {
+                height: 300px;
+            }
+
+            .meta-bar {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .team-grid,
+            .gallery-grid,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <img style="height: 55px;width: auto;"
+                src="https://keshavtunes.com/wp-content/uploads/2022/04/keashtunes.png" alt="img">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/music/index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/music.html">Music</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/video.html">Videos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/class.html">Class</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/contact.html">Document</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="project-category">MUSIC PRODUCTION</span>
+            <h1 class="hero-title">Midnight Symphony Studio Album</h1>
+            <p class="hero-subtitle">Complete production of a 12-track electronic album featuring international artists.
+                Professional mixing, mastering, and visual artwork creation.</p>
+        </div>
+    </section>
+
+    <!-- Project Detail Section -->
+    <section class="project-detail-section">
+        <div class="container">
+            <div class="row">
+                <!-- Main Content -->
+                <div class="col-lg-8">
+                    <!-- Project Image -->
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                            alt="Midnight Symphony Album" class="project-main-image">
+                    </div>
+
+                    <!-- Meta Bar -->
+                    <div class="meta-bar glass-card">
+                        <div class="meta-item">
+                            <div class="meta-icon">
+                                <i class="far fa-calendar"></i>
+                            </div>
+                            <div class="meta-content">
+                                <h5>COMPLETION DATE</h5>
+                                <p>December 15, 2023</p>
+                            </div>
+                        </div>
+
+                        <div class="meta-item">
+                            <div class="meta-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="meta-content">
+                                <h5>TEAM SIZE</h5>
+                                <p>8 Members</p>
+                            </div>
+                        </div>
+
+                        <div class="meta-item">
+                            <div class="meta-icon">
+                                <i class="fas fa-tag"></i>
+                            </div>
+                            <div class="meta-content">
+                                <h5>CATEGORY</h5>
+                                <p>Music Production</p>
+                            </div>
+                        </div>
+
+                        <div class="meta-item">
+                            <div class="meta-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <div class="meta-content">
+                                <h5>STATUS</h5>
+                                <p>Completed <span class="status-badge status-completed">✓ COMPLETED</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Overview -->
+                    <div class="content-section">
+                        <h2 class="content-title">
+                            <i class="fas fa-info-circle"></i> Project Overview
+                        </h2>
+                        <p class="content-text">
+                            Midnight Symphony is a groundbreaking electronic album that blends ambient soundscapes with
+                            progressive house elements.
+                            This project involved the complete production lifecycle from concept to final release,
+                            featuring collaborations with
+                            international artists from 5 different countries.
+                        </p>
+                        <p class="content-text">
+                            The album explores themes of urban nightlife, digital consciousness, and emotional journeys
+                            through sound.
+                            Each track was meticulously crafted to create a cohesive listening experience that takes the
+                            audience on an
+                            auditory journey from dusk till dawn.
+                        </p>
+                    </div>
+
+                    <!-- Key Features -->
+                    <div class="content-section">
+                        <h2 class="content-title">
+                            <i class="fas fa-star"></i> Key Features
+                        </h2>
+                        <ul class="features-list">
+                            <li class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-music"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h4>12 Original Tracks</h4>
+                                    <p>Each track uniquely composed with different electronic sub-genres including
+                                        ambient, house, and synthwave.</p>
+                                </div>
+                            </li>
+
+                            <li class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-globe-americas"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h4>International Collaborations</h4>
+                                    <p>Featured artists from USA, Germany, Japan, Brazil, and Australia bringing diverse
+                                        musical influences.</p>
+                                </div>
+                            </li>
+
+                            <li class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-sliders-h"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h4>Professional Mixing & Mastering</h4>
+                                    <p>State-of-the-art studio processing using analog emulation and digital precision
+                                        techniques.</p>
+                                </div>
+                            </li>
+
+                            <li class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-palette"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h4>Custom Artwork & Packaging</h4>
+                                    <p>Complete visual identity including album cover, booklet design, and merchandise.
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Technologies Used -->
+                    <div class="content-section">
+                        <h2 class="content-title">
+                            <i class="fas fa-tools"></i> Technologies Used
+                        </h2>
+                        <p class="content-text">
+                            The project utilized a combination of industry-standard software and cutting-edge tools to
+                            achieve
+                            professional-grade audio quality and creative innovation.
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Ableton Live 11</span>
+                            <span class="tech-tag">Pro Tools</span>
+                            <span class="tech-tag">iZotope Ozone 10</span>
+                            <span class="tech-tag">Native Instruments</span>
+                            <span class="tech-tag">Serum</span>
+                            <span class="tech-tag">Adobe Creative Suite</span>
+                            <span class="tech-tag">Spatial Audio Tools</span>
+                            <span class="tech-tag">Dolby Atmos</span>
+                        </div>
+                    </div>
+
+                    <!-- Project Timeline -->
+                    <div class="content-section">
+                        <h2 class="content-title">
+                            <i class="fas fa-project-diagram"></i> Project Timeline
+                        </h2>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-date">January 2023</div>
+                                <div class="timeline-content">
+                                    <h4>Concept Development</h4>
+                                    <p>Initial brainstorming sessions, theme development, and artist recruitment.</p>
+                                </div>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-date">March 2023</div>
+                                <div class="timeline-content">
+                                    <h4>Production Phase</h4>
+                                    <p>Music composition, recording sessions, and initial arrangements.</p>
+                                </div>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-date">August 2023</div>
+                                <div class="timeline-content">
+                                    <h4>Mixing & Mastering</h4>
+                                    <p>Professional audio processing, quality control, and final adjustments.</p>
+                                </div>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-date">December 2023</div>
+                                <div class="timeline-content">
+                                    <h4>Launch & Distribution</h4>
+                                    <p>Album release across all major streaming platforms and physical distribution.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Stats -->
+                    <div class="content-section">
+                        <h2 class="content-title">
+                            <i class="fas fa-chart-bar"></i> Project Statistics
+                        </h2>
+                        <div class="stats-grid">
+                            <div class="stat-card glass-card">
+                                <div class="stat-number">12</div>
+                                <div class="stat-label">Tracks</div>
+                            </div>
+
+                            <div class="stat-card glass-card">
+                                <div class="stat-number">5</div>
+                                <div class="stat-label">Countries</div>
+                            </div>
+
+                            <div class="stat-card glass-card">
+                                <div class="stat-number">8</div>
+                                <div class="stat-label">Team Members</div>
+                            </div>
+
+                            <div class="stat-card glass-card">
+                                <div class="stat-number">6</div>
+                                <div class="stat-label">Months Duration</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Team -->
+                    <div class="content-section">
+                        <h2 class="content-title">
+                            <i class="fas fa-users-cog"></i> Project Team
+                        </h2>
+                        <div class="team-grid">
+                            <div class="team-member glass-card">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                                    alt="Alex Chen" class="member-avatar">
+                                <h4 class="member-name">Alex Chen</h4>
+                                <p class="member-role">Lead Producer</p>
+                            </div>
+
+                            <div class="team-member glass-card">
+                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                                    alt="Maya Rodriguez" class="member-avatar">
+                                <h4 class="member-name">Maya Rodriguez</h4>
+                                <p class="member-role">Sound Engineer</p>
+                            </div>
+
+                            <div class="team-member glass-card">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                                    alt="David Kim" class="member-avatar">
+                                <h4 class="member-name">David Kim</h4>
+                                <p class="member-role">Visual Designer</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <a href="#" class="btn-primary">
+                            <i class="fas fa-play-circle"></i> Listen to Album
+                        </a>
+                        <a href="#" class="btn-outline">
+                            <i class="fas fa-download"></i> Download Press Kit
+                        </a>
+                        <a href="contact.html" class="btn-outline">
+                            <i class="fas fa-envelope"></i> Contact Team
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <div class="project-sidebar">
+                        <!-- Project Details Card -->
+                        <div class="glass-card sidebar-card">
+                            <h4 class="sidebar-title">Project Details</h4>
+                            <div class="project-info">
+                                <p><strong>Status:</strong> <span class="status-badge status-completed">Completed</span>
+                                </p>
+                                <p><strong>Duration:</strong> 6 Months</p>
+                                <p><strong>Budget:</strong> $50,000</p>
+                                <p><strong>Team Size:</strong> 8 Members</p>
+                                <p><strong>Streams:</strong> 2.5M+</p>
+                                <p><strong>Awards:</strong> 3 Nominations</p>
+                            </div>
+                        </div>
+
+                        <!-- Download Links -->
+                        <div class="glass-card sidebar-card">
+                            <h4 class="sidebar-title">Downloads</h4>
+                            <ul class="download-links">
+                                <a href="#" class="download-link">
+                                    <span><i class="fas fa-file-pdf me-2"></i> Project Report</span>
+                                    <i class="fas fa-download"></i>
+                                </a>
+                                <a href="#" class="download-link">
+                                    <span><i class="fas fa-images me-2"></i> Press Photos</span>
+                                    <i class="fas fa-download"></i>
+                                </a>
+                                <a href="#" class="download-link">
+                                    <span><i class="fas fa-music me-2"></i> Sample Tracks</span>
+                                    <i class="fas fa-download"></i>
+                                </a>
+                                <a href="#" class="download-link">
+                                    <span><i class="fas fa-file-alt me-2"></i> Technical Specs</span>
+                                    <i class="fas fa-download"></i>
+                                </a>
+                            </ul>
+                        </div>
+
+                        <!-- Related Projects -->
+                        <div class="glass-card sidebar-card">
+                            <h4 class="sidebar-title">Related Projects</h4>
+                            <a href="project-detail-2.html" class="related-project">
+                                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                                    alt="Related Project" class="related-image">
+                                <div>
+                                    <h5 class="related-title">Global Artist Exchange</h5>
+                                    <p class="related-category">Artist Collaboration</p>
+                                </div>
+                            </a>
+
+                            <a href="project-detail-3.html" class="related-project">
+                                <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                                    alt="Related Project" class="related-image">
+                                <div>
+                                    <h5 class="related-title">Immersive Audio</h5>
+                                    <p class="related-category">Sound Design</p>
+                                </div>
+                            </a>
+
+                            <a href="project-detail-4.html" class="related-project">
+                                <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                                    alt="Related Project" class="related-image">
+                                <div>
+                                    <h5 class="related-title">Electric Dreams Festival</h5>
+                                    <p class="related-category">Live Events</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back to Projects -->
+            <div class="back-section">
+                <a href="projects.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back to All Projects
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h3 class="mb-4">NEXUS MUSIC</h3>
+                    <p class="mb-4">Creating innovative music projects that push boundaries and inspire audiences
+                        worldwide.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-spotify"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-soundcloud"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-decoration-none text-light">Home</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-decoration-none text-light">About</a></li>
+                        <li class="mb-2"><a href="projects.html" class="text-decoration-none text-light">Projects</a>
+                        </li>
+                        <li class="mb-2"><a href="contact.html" class="text-decoration-none text-light">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="mb-4">Project Categories</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-light">Music Production</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-light">Artist Collaborations</a>
+                        </li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-light">Sound Design</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-light">Live Events</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 mb-4">
+                    <h5 class="mb-4">Contact Us</h5>
+                    <p class="mb-2"><i class="fas fa-envelope me-2"></i> projects@nexusmusic.com</p>
+                    <p class="mb-2"><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> Los Angeles, CA</p>
+                </div>
+            </div>
+
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+
+            <div class="text-center">
+                <p>&copy; 2023 Nexus Music Projects. All rights reserved. | <a href="#"
+                        class="text-decoration-none text-light">Privacy Policy</a> | <a href="#"
+                        class="text-decoration-none text-light">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Home Button -->
+    <a href="index.html" class="back-home-btn">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // JavaScript for Project Detail Page
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Navbar background on scroll
+            window.addEventListener('scroll', function () {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.95)';
+                } else {
+                    navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.9)';
+                }
+            });
+
+            // Download link click handlers
+            document.querySelectorAll('.download-link').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const fileName = this.querySelector('span').textContent.trim();
+                    alert(`Downloading: ${fileName}\n\nIn a real application, this would initiate the file download.`);
+                });
+            });
+
+            // Action button handlers
+            document.querySelector('.btn-primary').addEventListener('click', function (e) {
+                e.preventDefault();
+                alert('Redirecting to streaming platform...\n\nIn a real application, this would open the album on Spotify/Apple Music.');
+            });
+
+            // Add fade-in animation to sections on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe sections for animation
+            document.querySelectorAll('.content-section, .glass-card, .meta-bar, .team-member, .stat-card').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    if (this.getAttribute('href') === '#') return;
+
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Initialize tooltips
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+</body>
+
+</html>

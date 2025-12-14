@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Gallery | Nexus Music</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff4500;
+            --secondary-color: #ff8c00;
+            --accent-color: #ffd700;
+            --glass-dark: rgba(15, 15, 20, 0.7);
+            --glass-light: rgba(255, 255, 255, 0.05);
+            --text-light: rgba(255, 255, 255, 0.9);
+            --text-muted: rgba(255, 255, 255, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0a0a0f;
+            color: var(--text-light);
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(138, 43, 226, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 191, 255, 0.1) 0%, transparent 40%);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+
+        /* Glassmorphism Effects */
+        .glass-card {
+            background: var(--glass-dark);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid var(--glass-light);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.2);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(10, 10, 15, 0.9) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 28px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            margin: 0 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Hero Banner */
+        .video-hero {
+            height: 40vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 76px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 30px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--text-muted);
+        }
+
+        /* Video Cards */
+        .video-section {
+            padding: 80px 0;
+        }
+
+        .video-card {
+            background: var(--glass-dark);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(138, 43, 226, 0.2);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            /* 16:9 Aspect Ratio */
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-info {
+            padding: 20px;
+        }
+
+        .video-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .video-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Video Modal */
+        .video-modal-content {
+            background: var(--glass-dark);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-light);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid var(--glass-light);
+        }
+
+        .modal-title {
+            color: var(--text-light);
+        }
+
+        .btn-close-white {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+
+        /* Category Filters */
+        .filter-section {
+            padding: 40px 0 20px;
+        }
+
+        .filter-btn {
+            background: var(--glass-dark);
+            border: 1px solid var(--glass-light);
+            color: var(--text-light);
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            margin: 0 5px 10px;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-color: transparent;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(10, 10, 15, 0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--glass-dark);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: translateY(-5px);
+        }
+
+        /* Back to Home Button */
+        .back-home-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(138, 43, 226, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .back-home-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .navbar-brand {
+                font-size: 24px;
+            }
+
+            .filter-buttons {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+       <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <img style="height: 55px;width: auto;"
+                src="https://keshavtunes.com/wp-content/uploads/2022/04/keashtunes.png" alt="img">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/music/index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/music.html">Music</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/video.html">Videos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/class.html">Class</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music/contact.html">Document</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="video-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Video Gallery</h1>
+            <p class="hero-subtitle">Watch exclusive music videos, live performances, and behind-the-scenes content</p>
+        </div>
+    </section>
+
+    <!-- Category Filters -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex flex-wrap justify-content-center filter-buttons">
+                        <button class="filter-btn active" data-filter="all">All Videos</button>
+                        <button class="filter-btn" data-filter="music-video">Music Videos</button>
+                        <button class="filter-btn" data-filter="live">Live Performances</button>
+                        <button class="filter-btn" data-filter="behind-scenes">Behind The Scenes</button>
+                        <button class="filter-btn" data-filter="interview">Interviews</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Gallery - All videos embedded in HTML -->
+    <section class="video-section">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Video 1 - Music Video -->
+                <div class="col-lg-4 col-md-6" data-category="music-video">
+                    <div class="video-card glass-card">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/dX3k_QDnzHE"
+                                title="M83 - Midnight City (Official Video)"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-info">
+                            <h4 class="video-title">Midnight City (Official Video)</h4>
+                            <p class="video-description">The official music video for M83's hit song "Midnight City"
+                                from the album Hurry Up, We're Dreaming.</p>
+                            <div class="video-meta">
+                                <span><i class="fas fa-music me-1"></i> M83</span>
+                                <span><i class="fas fa-clock me-1"></i> 4:22</span>
+                                <span><i class="fas fa-eye me-1"></i> 245M views</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 2 - Live Performance -->
+                <div class="col-lg-4 col-md-6" data-category="live">
+                    <div class="video-card glass-card">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/LXb3EKWsInQ"
+                                title="The Weeknd - Live at Coachella 2023"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-info">
+                            <h4 class="video-title">Live at Coachella 2023</h4>
+                            <p class="video-description">Full live performance by The Weeknd at Coachella Valley Music
+                                and Arts Festival 2023.</p>
+                            <div class="video-meta">
+                                <span><i class="fas fa-music me-1"></i> The Weeknd</span>
+                                <span><i class="fas fa-clock me-1"></i> 1:25:30</span>
+                                <span><i class="fas fa-eye me-1"></i> 89M views</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 3 - Behind The Scenes -->
+                <div class="col-lg-4 col-md-6" data-category="behind-scenes">
+                    <div class="video-card glass-card">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/7NOSDKb0HlU"
+                                title="Making of 'Blinding Lights' - Behind The Scenes"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-info">
+                            <h4 class="video-title">Making of 'Blinding Lights'</h4>
+                            <p class="video-description">Exclusive behind-the-scenes look at the production and
+                                recording of The Weeknd's hit single.</p>
+                            <div class="video-meta">
+                                <span><i class="fas fa-music me-1"></i> The Weeknd</span>
+                                <span><i class="fas fa-clock me-1"></i> 12:45</span>
+                                <span><i class="fas fa-eye me-1"></i> 34M views</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 4 - Music Video -->
+                <div class="col-lg-4 col-md-6" data-category="music-video">
+                    <div class="video-card glass-card">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/TdrL3QxjyVw"
+                                title="Dua Lipa - Levitating (Official Video)"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-info">
+                            <h4 class="video-title">Levitating (Official Video)</h4>
+                            <p class="video-description">Official music video for Dua Lipa's chart-topping single
+                                "Levitating" from Future Nostalgia.</p>
+                            <div class="video-meta">
+                                <span><i class="fas fa-music me-1"></i> Dua Lipa</span>
+                                <span><i class="fas fa-clock me-1"></i> 3:45</span>
+                                <span><i class="fas fa-eye me-1"></i> 567M views</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 5 - Interview -->
+                <div class="col-lg-4 col-md-6" data-category="interview">
+                    <div class="video-card glass-card">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/p1PopTnuP8A"
+                                title="Billie Eilish Interview: Creating 'Bad Guy'"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-info">
+                            <h4 class="video-title">Creating 'Bad Guy' - Interview</h4>
+                            <p class="video-description">Billie Eilish discusses the creative process behind her
+                                Grammy-winning hit "Bad Guy".</p>
+                            <div class="video-meta">
+                                <span><i class="fas fa-music me-1"></i> Billie Eilish</span>
+                                <span><i class="fas fa-clock me-1"></i> 18:30</span>
+                                <span><i class="fas fa-eye me-1"></i> 42M views</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 6 - Live Performance -->
+                <div class="col-lg-4 col-md-6" data-category="live">
+                    <div class="video-card glass-card">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/fJ9rUzIMcZQ"
+                                title="Queen - Bohemian Rhapsody (Live at Wembley)"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-info">
+                            <h4 class="video-title">Bohemian Rhapsody (Live at Wembley)</h4>
+                            <p class="video-description">Legendary performance of Bohemian Rhapsody by Queen at Wembley
+                                Stadium in 1986.</p>
+                            <div class="video-meta">
+                                <span><i class="fas fa-music me-1"></i> Queen</span>
+                                <span><i class="fas fa-clock me-1"></i> 6:15</span>
+                                <span><i class="fas fa-eye me-1"></i> 890M views</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 7 - Behind The Scenes -->
+                <div class="col-lg-4 col-md-6" data-category="behind-scenes">
+                    <div class="video-card glass-card">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/1lyu1KKwC74"
+                                title="Studio Sessions with Daft Punk"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-info">
+                            <h4 class="video-title">Studio Sessions with Daft Punk</h4>
+                            <p class="video-description">Rare footage of Daft Punk working in the studio on their album
+                                Random Access Memories.</p>
+                            <div class="video-meta">
+                                <span><i class="fas fa-music me-1"></i> Daft Punk</span>
+                                <span><i class="fas fa-clock me-1"></i> 24:10</span>
+                                <span><i class="fas fa-eye me-1"></i> 67M views</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 8 - Music Video -->
+                <div class="col-lg-4 col-md-6" data-category="music-video">
+                    <div class="video-card glass-card">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/6Whgn_iE5uc"
+                                title="Travis Scott - SICKO MODE (Official Video)"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-info">
+                            <h4 class="video-title">SICKO MODE (Official Video)</h4>
+                            <p class="video-description">Official music video for Travis Scott's hit single "SICKO MODE"
+                                featuring Drake.</p>
+                            <div class="video-meta">
+                                <span><i class="fas fa-music me-1"></i> Travis Scott</span>
+                                <span><i class="fas fa-clock me-1"></i> 5:16</span>
+                                <span><i class="fas fa-eye me-1"></i> 1.2B views</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 9 - Interview -->
+                <div class="col-lg-4 col-md-6" data-category="interview">
+                    <div class="video-card glass-card">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/5-sfG8BV8wU" title="Brian Eno on Ambient Music"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-info">
+                            <h4 class="video-title">Brian Eno on Ambient Music</h4>
+                            <p class="video-description">The pioneer of ambient music discusses his creative philosophy
+                                and production techniques.</p>
+                            <div class="video-meta">
+                                <span><i class="fas fa-music me-1"></i> Brian Eno</span>
+                                <span><i class="fas fa-clock me-1"></i> 36:45</span>
+                                <span><i class="fas fa-eye me-1"></i> 8.9M views</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center mt-5">
+                <button class="btn btn-outline-light px-5 py-2">
+                    <i class="fas fa-plus me-2"></i> Load More Videos
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Video Modal (For Mobile/Alternative View) -->
+    <div class="modal fade" id="featuredVideoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content video-modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="featuredVideoTitle">Featured Video</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="ratio ratio-16x9">
+                        <iframe id="featuredVideoFrame" src="" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h3 class="mb-4">NEXUS MUSIC</h3>
+                    <p class="mb-4">Stream music that moves your soul. Discover new sounds with our curated collection.
+                    </p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-spotify"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-soundcloud"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-decoration-none text-light">Home</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-decoration-none text-light">About</a></li>
+                        <li class="mb-2"><a href="music.html" class="text-decoration-none text-light">Music</a></li>
+                        <li class="mb-2"><a href="videos.html" class="text-decoration-none text-light">Videos</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="mb-4">Video Categories</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-light">Music Videos</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-light">Live Performances</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-light">Behind The Scenes</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-light">Artist Interviews</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 mb-4">
+                    <h5 class="mb-4">Contact Us</h5>
+                    <p class="mb-2"><i class="fas fa-envelope me-2"></i> contact@nexusmusic.com</p>
+                    <p class="mb-2"><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> Los Angeles, CA</p>
+                </div>
+            </div>
+
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+
+            <div class="text-center">
+                <p>&copy; 2023 Nexus Music. All rights reserved. | <a href="#"
+                        class="text-decoration-none text-light">Privacy Policy</a> | <a href="#"
+                        class="text-decoration-none text-light">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Home Button -->
+    <a href="index.html" class="back-home-btn">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Minimal JavaScript for functionality
+
+        // Initialize modal
+        const featuredVideoModal = new bootstrap.Modal(document.getElementById('featuredVideoModal'));
+        const featuredVideoFrame = document.getElementById('featuredVideoFrame');
+        const featuredVideoTitle = document.getElementById('featuredVideoTitle');
+
+        // Function to play video in modal (optional - videos already play inline)
+        function playVideoInModal(videoUrl, title) {
+            featuredVideoFrame.src = videoUrl;
+            featuredVideoTitle.textContent = title;
+            featuredVideoModal.show();
+        }
+
+        // Filter videos by category
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                // Remove active class from all buttons
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // Add active class to clicked button
+                this.classList.add('active');
+
+                const filter = this.dataset.filter;
+
+                // Show/hide videos based on filter
+                document.querySelectorAll('.col-lg-4.col-md-6').forEach(video => {
+                    if (filter === 'all' || video.dataset.category === filter) {
+                        video.style.display = 'block';
+                    } else {
+                        video.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.95)';
+            } else {
+                navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.9)';
+            }
+        });
+
+        // Optional: Stop video playback when modal is closed
+        document.getElementById('featuredVideoModal').addEventListener('hidden.bs.modal', function () {
+            featuredVideoFrame.src = '';
+        });
+
+        // Optional: Play video on card click (alternative to inline playback)
+        document.querySelectorAll('.video-card').forEach(card => {
+            card.addEventListener('click', function (e) {
+                // Don't trigger if clicking on iframe or buttons
+                if (e.target.tagName === 'IFRAME' || e.target.tagName === 'BUTTON') {
+                    return;
+                }
+
+                // Optional: You can add fullscreen playback here if needed
+                // const iframe = this.querySelector('iframe');
+                // if (iframe.requestFullscreen) {
+                //     iframe.requestFullscreen();
+                // }
+            });
+        });
+    </script>
+</body>
+
+</html>
